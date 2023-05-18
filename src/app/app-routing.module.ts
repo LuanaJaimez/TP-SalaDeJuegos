@@ -1,23 +1,18 @@
-import { NgModule } from '@angular/core';
+import {   canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { HomeComponent } from './components/home/home.component';
-import { QuienSoyComponent } from './components/quien-soy/quien-soy.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { NgModule } from '@angular/core';
+
+const redirectLoggedInToHome = () => redirectLoggedInTo(['dashboard']);
+
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/home' },
-  { path: 'home', component: HomeComponent, ...canActivate(()=> redirectUnauthorizedTo(['/register'])) },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'quien-soy', component: QuienSoyComponent },
-  { path: '**', component: HomeComponent }
-
+  {path: '',loadChildren: () =>import('./navigation/auth/auth.module').then((m) => m.AuthModule),...canActivate(redirectLoggedInToHome)},
+  {path: 'dashboard',loadChildren: () =>import('./navigation/dashboard/dashboard.module').then((m) => m.DashboardModule)},
+  {path: '**',redirectTo: '',pathMatch: 'full'}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
