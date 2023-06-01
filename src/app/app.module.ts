@@ -32,7 +32,7 @@ import { QuienSoyComponent } from './navigation/dashboard/quien-soy/quien-soy.co
     CommonModule,
     ToastrModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

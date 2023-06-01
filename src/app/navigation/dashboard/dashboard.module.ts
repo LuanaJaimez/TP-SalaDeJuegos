@@ -9,6 +9,7 @@ import { AhorcadoComponent } from './ahorcado/ahorcado.component';
 import { RouterModule } from '@angular/router';
 import { ChatComponent } from './chat/chat.component';
 import { MayorMenorComponent } from './mayor-menor/mayor-menor.component';
+import { PreguntadosComponent } from './preguntados/preguntados.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +19,14 @@ import { MayorMenorComponent } from './mayor-menor/mayor-menor.component';
     AhorcadoComponent,
     ChatComponent,
     MayorMenorComponent,
+    PreguntadosComponent,
   ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
     DashboardRoutingModule,
-    RouterModule
+    RouterModule,
   ]
 })
 export class DashboardModule { }
